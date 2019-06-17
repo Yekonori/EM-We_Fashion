@@ -14,8 +14,13 @@ class CreatePicturesTable extends Migration
     public function up()
     {
         Schema::create('pictures', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->increments('id'); // Primary Key
+            $table->unsignedInteger('product_id'); // Foreign Key of Products Table
+            $table->string('link', 100); // Varvchar(100)
+            $table->string('title', 100)->nullable(); // Varvchar(100) + Nullable
+            $table->timestamps(); // TimeStamps
+            
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE'); // Cascade delete
         });
     }
 

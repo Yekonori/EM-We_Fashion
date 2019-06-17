@@ -14,8 +14,19 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->increments('id'); // Primary Key
+            $table->string('name', 100); // Varchar(100)
+            $table->text('description'); // Text
+            $table->decimal('price', 7, 2); // Decimal(7,2)
+            $table->unsignedInteger('size_id'); // Foreign Key of Sizes Table
+            $table->enum('visibility', ['published', 'unpublished']); // Enum('published', 'unpublished')
+            $table->enum('status', ['sale', 'standard']); // Enum('sale', 'standard')
+            $table->string('reference', 16)->nullable(); // Varchar(16)
+            $table->unsignedInteger('categorie_id')->nullable(); // Foreign Key of Categories Table
+            $table->timestamps(); // TimeStamps
+
+            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('CASCADE'); // Cascade delete
+            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('SET NULL'); // Set NULL on delete
         });
     }
 
