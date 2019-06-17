@@ -46,12 +46,24 @@ class ProductTableSeeder extends Seeder
             $size = App\Size::find(rand(1,5));
 
             $product->size()->associate($size);
-            $product->save();
 
             // Choose the categorie randomly
-            $categorie = App\Categorie::find(rand(1,2));
+            $categorieRNG = rand(1,2);
+            $categorie = App\Categorie::find($categorieRNG);
 
             $product->categorie()->associate($categorie);
+
+            if($categorieRNG === 1) {
+                // Men product
+                $pictures = glob(public_path().'/images/hommes/*');
+                $pictureRNG = $pictures[array_rand($pictures)];
+            } else {
+                // Women product
+                $pictures = glob(public_path().'/images/femmes/*');
+                $pictureRNG = $pictures[array_rand($pictures)];
+            }
+
+            $product->picture = basename($pictureRNG);
             $product->save();
         });
     }

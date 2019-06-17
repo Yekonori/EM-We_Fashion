@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description'); // Text
             $table->decimal('price', 7, 2); // Decimal(7,2)
             $table->unsignedInteger('size_id')->nullable(); // Foreign Key of Sizes Table
+            $table->text('picture')->nullable(); // Text
             $table->enum('visibility', ['published', 'unpublished']); // Enum('published', 'unpublished')
             $table->enum('status', ['standard', 'sale']); // Enum('standard', 'sale')
             $table->string('reference', 16)->nullable(); // Varchar(16)

@@ -13,8 +13,4 @@ class Product extends Model
     public function size() {
         return $this->belongsTo(Size::class);
     }
-
-    public function picture() {
-        return $this->hasOne(Picture::class);
-    }
 }
