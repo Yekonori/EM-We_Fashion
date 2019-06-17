@@ -12,25 +12,6 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
         /**
-         * Size Creation : 
-         */
-        App\Size::create([
-            'size' => 'XS'
-        ]);
-        App\Size::create([
-            'size' => 'S'
-        ]);
-        App\Size::create([
-            'size' => 'M'
-        ]);
-        App\Size::create([
-            'size' => 'L'
-        ]);
-        App\Size::create([
-            'size' => 'XL'
-        ]);
-
-        /**
          * Categorie Creation : 
          */
         App\Categorie::create([
@@ -43,16 +24,49 @@ class ProductTableSeeder extends Seeder
         // Creation of 80 Product
         factory(App\Product::class, 80)->create()->each(function($product) {
             // Choose the size randomly
-            $size = App\Size::find(rand(1,5));
+            $sizeXS = rand(0,100);
+            $sizeS = rand(0,100);
+            $sizeM = rand(0,100);
+            $sizeL = rand(0,100);
+            $sizeXL = rand(0,100);
 
-            $product->size()->associate($size);
+            $size = "";
+
+            if($sizeXS >= 50) {
+                $size .= "XS";
+            }
+            if($sizeS >= 50) {
+                if ( strlen($size) >= 1 ) $size .= ",";
+                $size .= "S";
+            }
+            if($sizeM >= 50) {
+                if ( strlen($size) >= 1 ) $size .= ",";
+                $size .= "M";
+            }
+            if($sizeL >= 50) {
+                if ( strlen($size) >= 1 ) $size .= ",";
+                $size .= "L";
+            }
+            if($sizeXL >= 50) {
+                if ( strlen($size) >= 1 ) $size .= ",";
+                $size .= "XL";
+            }
+            if ( strlen($size) < 1 ) $size == "M";
+
+            $product->size = $size;
 
             // Choose the categorie randomly
+            // The rand need to be update if you add or remove some categorie
             $categorieRNG = rand(1,2);
             $categorie = App\Categorie::find($categorieRNG);
 
             $product->categorie()->associate($categorie);
 
+            /*
+             * In my case : 
+             *  - 1 => 'Homme'
+             *  - 2 => 'Femme'
+             */ 
             if($categorieRNG === 1) {
                 // Men product
                 $pictures = glob(public_path().'/images/hommes/*');
