@@ -1,0 +1,18 @@
+a {
+    color: black;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.fashionLogo { color: #66EB9A !important; }
+
+.pictoHeight { height: 25px; }
+
+.imgHeight { height: 350px; }
+
+.bigImgHeight { height: 350px; }
+
+.cardBodyHeight { height: 120px; }

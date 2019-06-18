@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>We Fashion</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/index.css')}}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                Place du menu
+                @include('partials.menu')
             </div> <!-- ./end div.col-md-12 -->
         </div> <!-- ./end div.row -->
 
@@ -21,6 +22,35 @@
             </div> <!-- ./end div.col-md-12 -->
         </div> <!-- ./end div.row -->
     </div>
+
+    <footer class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Informations</h3>
+                <ul>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Presse</a></li>
+                    <li><a href="#">Fabrication</a></li>
+                </ul>
+            </div> <!-- ./end div.col-md-4 -->
+            <div class="col-md-4">
+                <h3>Service Client</h3>
+                <ul>
+                    <li><a href="#">Contactez-nous</a></li>
+                    <li><a href="#">Livraison & retour</a></li>
+                    <li><a href="#">Conditions de vente</a></li>
+                </ul>
+            </div> <!-- ./end div.col-md-4 -->
+            <div class="col-md-4">
+                <h3>Réseaux Sociaux</h3>
+                <ul>
+                    <li><a href="#"><img class="pictoHeight" src="{{ asset('images/pictos/facebook-f-brands.svg') }}" alt="logo facebook"></a></li>
+                    <li><a href="#"><img class="pictoHeight" src="{{ asset('images/pictos/instagram-brands.svg') }}" alt="logo instagram"></a></li>
+                    <li><a href="#">Inscrivez-vous à la newsletter</a></li>
+                </ul>
+            </div> <!-- ./end div.col-md-4 -->
+        </div> <!-- ./end div.row -->
+    </footer>
 
     <script src="{{asset('js/app.js')}}"></script>
 </body>

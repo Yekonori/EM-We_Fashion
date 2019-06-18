@@ -66,18 +66,23 @@ class ProductTableSeeder extends Seeder
              * In my case : 
              *  - 1 => 'Homme'
              *  - 2 => 'Femme'
-             */ 
+             */
+            
+            $folderCategorie = '';
+
             if($categorieRNG === 1) {
                 // Men product
                 $pictures = glob(public_path().'/images/hommes/*');
+                $folderCategorie = "hommes/";
                 $pictureRNG = $pictures[array_rand($pictures)];
             } else {
                 // Women product
                 $pictures = glob(public_path().'/images/femmes/*');
+                $folderCategorie = "femmes/";
                 $pictureRNG = $pictures[array_rand($pictures)];
             }
 
-            $product->picture = basename($pictureRNG);
+            $product->picture = $folderCategorie . basename($pictureRNG);
             $product->save();
         });
     }
