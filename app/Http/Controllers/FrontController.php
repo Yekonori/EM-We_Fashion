@@ -30,7 +30,7 @@ class FrontController extends Controller
         $products = Product::published()->sales()->paginate($this->paginate);
 
         // return index.blade.php
-        return view('front.index', ['products' => $products]);
+        return view('front.sales', ['products' => $products]);
     }
 
     public function categorie(int $id) {
@@ -38,6 +38,6 @@ class FrontController extends Controller
         $products = Product::published()->categorie($id)->paginate($this->paginate);
 
         // return index.blade.php
-        return view('front.index', ['products' => $products]);
+        return view('front.categorie', ['products' => $products]);
     }
 }
