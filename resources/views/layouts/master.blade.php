@@ -12,7 +12,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(Request::is('admin/*'))
+                @include('partials.menuAdmin')
+                @else
                 @include('partials.menu')
+                @endif
             </div> <!-- ./end div.col-md-12 -->
         </div> <!-- ./end div.row -->
 
