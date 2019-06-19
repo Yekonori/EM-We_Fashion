@@ -94,6 +94,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('product.index')->with('message', 'success delete');
+        return redirect()->route('products.index');
     }
 }

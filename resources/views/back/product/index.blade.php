@@ -25,15 +25,15 @@
                 <tr>
                     <th scope="row">{{ $product->name }}</th>
                     <td>{{ $product->categorie->categorie }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->price }}€</td>
                     <td>{{ $product->status }}</td>
                     <td>{{ $product->visibility }}</td>
                     <td><a class="btn btn-primary" href="#" role="button">Éditer</a></td>
                     <td>
-                        <form class="delete" method="POST" action="{{route('product.destroy', $product->id)}}">
-                            {{ method_field('DELETE') }}
+                        <form class="delete" method="POST" action="{{route('products.destroy', $product->id)}}">
                             {{ csrf_field() }}
-                            <a class="btn btn-danger" href="#" role="button">Supprimer</a>
+                            {{ method_field('DELETE') }}
+                            <input class="btn btn-danger" type="submit" value="Supprimer">
                         </form>
                     </td>
                 </tr>
@@ -46,4 +46,9 @@
                 {{ $products->links() }}
         </div> <!-- ./end div.col-md-12 -->
     </div> <!-- ./end div.row -->
+@endsection
+
+@section('scripts')
+    @parent
+    <script src="{{ asset('js/confirm.js') }}"></script>
 @endsection

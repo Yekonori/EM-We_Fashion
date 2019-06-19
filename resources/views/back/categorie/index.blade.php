@@ -21,7 +21,13 @@
                 <tr>
                     <th scope="row">{{ $categorie->categorie }}</th>
                     <td><a class="btn btn-primary" href="#" role="button">Éditer</a></td>
-                    <td><a class="btn btn-danger" href="#" role="button">Supprimer</a></td>
+                    <td>
+                        <form class="delete" method="POST" action="{{route('categories.destroy', $categorie->id)}}">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <input class="btn btn-danger" type="submit" value="Supprimer">
+                        </form>
+                    </td>
                 </tr>
                 @empty
                 <p>Aucune catégorie...</p>

@@ -1,5 +1,7 @@
-(function() {
-    $('.delete').on('submit', function() {
-        return confirm("Voulez-vous vraiment supprimer cet objet ?")
+(function () {
+    $(document).ready(function () {
+        $(".delete").on("submit", function(){
+            return confirm("Toute suppression est définitive. Voulez-vous vraiment le supprimer ?");
+        });
     });
-})
+})($);
