@@ -26,8 +26,20 @@
                     <th scope="row">{{ $product->name }}</th>
                     <td>{{ $product->categorie->categorie }}</td>
                     <td>{{ $product->price }}€</td>
-                    <td>{{ $product->status }}</td>
-                    <td>{{ $product->visibility }}</td>
+                    <td>
+                        @if($product->status === 'sale')
+                        <p class="text-danger">{{ $product->status }}</p>
+                        @else
+                        <p>{{ $product->status }}</p>
+                        @endif
+                    </td>
+                    <td>
+                        @if($product->visibility === 'published')
+                        <p class="text-success">{{ $product->visibility }}</p>
+                        @else
+                        <p class="text-warning">{{ $product->visibility }}</p>
+                        @endif
+                    </td>
                     <td><a class="btn btn-primary" href="#" role="button">Éditer</a></td>
                     <td>
                         <form class="delete" method="POST" action="{{route('products.destroy', $product->id)}}">
