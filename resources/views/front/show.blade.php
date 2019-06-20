@@ -20,7 +20,9 @@
                 @empty
                 @endforelse
             </select>
+            @if( $product->visibility === 'published' )
             <a class="btn btn-primary" href="#" role="button">Acheter</a>
+            @endif
         </div> <!-- ./end div.col-md-4 -->
     </div> <!-- ./end div.row -->
 

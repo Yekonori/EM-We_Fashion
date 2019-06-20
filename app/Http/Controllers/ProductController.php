@@ -48,7 +48,35 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // All the fields
+        $this->validate($request, [
+            'name' => 'required|string|min:5|max:100',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0|max:99999.99',
+            'size.*' => 'required|string',
+            'picture' => 'required|image|mimes:jpeg,png,jpg,svg',
+            'visibility' => 'required|in:published,unpublished',
+            'status' => 'required|in:standard,sale',
+            'reference' => 'required|alpha_num',
+            'categorie_id' => 'required|string'
+        ]);
+
+        $datas = $request->all();
+        $datas["size"] = implode(',', $request->size);
+
+        // Picture : 
+        $picture = $request->file('picture');
+        
+        if (!empty($picture)) {
+            $picture->store('products');
+            $datas["picture"] = 'products/' . $picture->hashName();
+        }
+
+        // Create the product
+        $product = Product::create($datas);
+
+        // Redirection to categorie/index
+        return redirect()->route('products.index')->with('message', 'Produit crée avec succès');
     }
 
     /**
@@ -70,7 +98,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Categorie::pluck('categorie', 'id')->all();
+
+        return view('back.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -82,7 +113,37 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // All the fields
+         $this->validate($request, [
+            'name' => 'required|string|min:5|max:100',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0|max:99999.99',
+            'size.*' => 'required|string',
+            'picture' => 'image|mimes:jpeg,png,jpg,svg',
+            'visibility' => 'required|in:published,unpublished',
+            'status' => 'required|in:standard,sale',
+            'reference' => 'required|alpha_num',
+            'categorie_id' => 'required|string'
+        ]);
+
+        $datas = $request->all();
+        $datas["size"] = implode(',', $request->size);
+
+        // Picture : 
+        $picture = $request->file('picture');
+        
+        if (!empty($picture)) {
+            $picture->store('products');
+            $datas["picture"] = 'products/' . $picture->hashName();
+        }
+
+        // Find the product
+        $product = Product::find($id);
+
+        $product->update($datas);
+
+        // Redirection to categorie/index
+        return redirect()->route('products.index')->with('message', 'Produit crée avec succès');
     }
 
     /**

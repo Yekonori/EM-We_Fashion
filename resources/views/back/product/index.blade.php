@@ -5,6 +5,11 @@
         <div class="col-md-12 text-right mb-4">
             <a class="btn btn-primary" href="{{route('products.create')}}" role="button">Nouveau Produit</a>
         </div> <!-- ./end div.col-md-12 -->
+        @if(Session::has('message'))
+        <div class="col-md-12 mb-4">
+            <span class="alert alert-success">{{ Session::get('message') }}</span>
+        </div>
+        @endif
     </div> <!-- ./end div.row -->
 
     <div class="row">

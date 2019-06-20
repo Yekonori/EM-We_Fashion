@@ -47,7 +47,7 @@ class CategorieController extends Controller
     {
         // All the fields
         $this->validate($request, [
-            'categorie' => 'required|string'
+            'categorie' => 'required|string|max:100'
         ]);
 
         // Create the categorie
@@ -76,7 +76,9 @@ class CategorieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categorie = Categorie::find($id);
+
+        return view('back.categorie.edit', ['categorie' => $categorie]);
     }
 
     /**
@@ -88,7 +90,18 @@ class CategorieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // All the fields
+        $this->validate($request, [
+            'categorie' => 'required|string'
+        ]);
+
+        $categorie = Categorie::find($id);
+
+        // Create the categorie
+        $categorie->update($request->all());
+
+        // Redirection to categorie/index
+        return redirect()->route('categories.index')->with('message', 'Catégorie éditée avec succès');
     }
 
     /**
