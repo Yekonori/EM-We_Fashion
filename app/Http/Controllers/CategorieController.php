@@ -33,8 +33,8 @@ class CategorieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {        
+        return view('back.categorie.create');
     }
 
     /**
@@ -45,7 +45,16 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // All the fields
+        $this->validate($request, [
+            'categorie' => 'required|string'
+        ]);
+
+        // Create the categorie
+        $categorie = Categorie::create($request->all());
+
+        // Redirection to categorie/index
+        return redirect()->route('categories.index')->with('message', 'Catégorie créée avec succès');
     }
 
     /**

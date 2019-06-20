@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Categorie;
 
 class ProductController extends Controller
 {
@@ -34,7 +35,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categorie::pluck('categorie', 'id')->all();
+
+        return view('back.product.create', ['categories' => $categories]);
     }
 
     /**

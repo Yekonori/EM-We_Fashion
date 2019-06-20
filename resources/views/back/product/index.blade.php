@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 text-right mb-4">
-            <a class="btn btn-primary" href="#" role="button">Nouveau Produit</a>
+            <a class="btn btn-primary" href="{{route('products.create')}}" role="button">Nouveau Produit</a>
         </div> <!-- ./end div.col-md-12 -->
     </div> <!-- ./end div.row -->
 
@@ -40,7 +40,7 @@
                         <p class="text-warning">{{ $product->visibility }}</p>
                         @endif
                     </td>
-                    <td><a class="btn btn-primary" href="#" role="button">Éditer</a></td>
+                    <td><a class="btn btn-primary" href="{{route('products.edit', $product->id)}}" role="button">Éditer</a></td>
                     <td>
                         <form class="delete" method="POST" action="{{route('products.destroy', $product->id)}}">
                             {{ csrf_field() }}

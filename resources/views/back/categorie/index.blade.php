@@ -1,10 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="col-md-12 text-right mb-4">
-            <a class="btn btn-primary" href="#" role="button">Nouvelle Catégorie</a>
+            <a class="btn btn-primary" href="{{route('categories.create')}}" role="button">Nouvelle Catégorie</a>
         </div> <!-- ./end div.col-md-12 -->
+        @if(Session::has('message'))
+        <div class="col-md-12 mb-4">
+            <span class="alert alert-success">{{ Session::get('message') }}</span>
+        </div>
+        @endif
     </div> <!-- ./end div.row -->
 
     <div class="row">
@@ -20,7 +25,7 @@
                 @forelse($categories as $categorie)
                 <tr>
                     <th scope="row">{{ $categorie->categorie }}</th>
-                    <td><a class="btn btn-primary" href="#" role="button">Éditer</a></td>
+                    <td><a class="btn btn-primary" href="{{route('categories.edit', $categorie->id)}}" role="button">Éditer</a></td>
                     <td>
                         <form class="delete" method="POST" action="{{route('categories.destroy', $categorie->id)}}">
                             {{ csrf_field() }}
