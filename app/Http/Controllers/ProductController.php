@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // All the fields
+        // All the fields validators
         $this->validate($request, [
             'name' => 'required|string|min:5|max:100',
             'description' => 'required|string',
@@ -61,13 +61,16 @@ class ProductController extends Controller
             'categorie_id' => 'required|string'
         ]);
 
+        // Stock the request
         $datas = $request->all();
+        // Implode the size's array to get a string
         $datas["size"] = implode(',', $request->size);
 
         // Picture : 
         $picture = $request->file('picture');
         
         if (!empty($picture)) {
+            // Store the picture in the products folder
             $picture->store('products');
             $datas["picture"] = 'products/' . $picture->hashName();
         }
@@ -98,7 +101,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        // Find the product
         $product = Product::find($id);
+        // Pluck all categories and id
         $categories = Categorie::pluck('categorie', 'id')->all();
 
         return view('back.product.edit', ['product' => $product, 'categories' => $categories]);
@@ -122,17 +127,20 @@ class ProductController extends Controller
             'picture' => 'image|mimes:jpeg,png,jpg,svg',
             'visibility' => 'required|in:published,unpublished',
             'status' => 'required|in:standard,sale',
-            'reference' => 'required|alpha_num',
+            'reference' => 'required|alpha_num|min:16|max:16',
             'categorie_id' => 'required|string'
         ]);
 
+        // Stock the request
         $datas = $request->all();
+        // Implode the size's array to get a string
         $datas["size"] = implode(',', $request->size);
 
         // Picture : 
         $picture = $request->file('picture');
         
         if (!empty($picture)) {
+            // Store the picture in the products folder
             $picture->store('products');
             $datas["picture"] = 'products/' . $picture->hashName();
         }
@@ -140,10 +148,11 @@ class ProductController extends Controller
         // Find the product
         $product = Product::find($id);
 
+        // Update the product
         $product->update($datas);
 
-        // Redirection to categorie/index
-        return redirect()->route('products.index')->with('message', 'Produit crée avec succès');
+        // Redirection to products/index.blade.php
+        return redirect()->route('products.index')->with('message', 'Produit édité avec succès');
     }
 
     /**
@@ -154,10 +163,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        // Find the product
         $product = Product::find($id);
 
+        // Delete the product
         $product->delete();
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('message', 'Produit supprimé avec succès');
     }
 }

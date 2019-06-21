@@ -48,7 +48,9 @@
                     <td><a class="btn btn-primary" href="{{route('products.edit', $product->id)}}" role="button">Éditer</a></td>
                     <td>
                         <form class="delete" method="POST" action="{{route('products.destroy', $product->id)}}">
+                            <!-- Token security -->
                             {{ csrf_field() }}
+                            <!-- The form make a DELETE -->
                             {{ method_field('DELETE') }}
                             <input class="btn btn-danger" type="submit" value="Supprimer">
                         </form>

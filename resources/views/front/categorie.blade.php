@@ -4,6 +4,7 @@
     <!-- {{$products}} -->
     <div class="row">
         <div class="col-md-12 text-right">
+            <!-- Display the total number of products -->
             <p>{{ $products->total() }} résultats</p>
         </div> <!-- ./end div.col-md-12 -->
     </div> <!-- ./end div.row -->
@@ -24,6 +25,7 @@
         @empty
         @endforelse
         <div class="col-md-12 text-right">
+            <!-- The pagination -->
             {{ $products->links() }}
         </div> <!-- ./end div.col-md-12 -->
     </div> <!-- ./end div.row -->

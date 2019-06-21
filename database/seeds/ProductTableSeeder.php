@@ -32,6 +32,10 @@ class ProductTableSeeder extends Seeder
 
             $size = "";
 
+            /**
+             * For all sizes,
+             * check if his own random is higher or equal to 50
+             */
             if($sizeXS >= 50) {
                 $size .= "XS";
             }

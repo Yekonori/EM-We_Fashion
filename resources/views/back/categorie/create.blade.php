@@ -5,6 +5,7 @@
         <h1>Créer une catégorie :</h1>
         <div class="col-md-12">
             <form action="{{route('categories.store')}}" method="post" enctype="multipart/form-data">
+                <!-- Token security -->
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="categorie">Nom de la catégorie : </label>

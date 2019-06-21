@@ -5,7 +5,9 @@
         <h1>Créer un produit :</h1>
         <div class="col-md-12">
             <form action="{{route('products.update', $product->id)}}" method="post" enctype="multipart/form-data">
+                <!-- Token security -->
                 {{ csrf_field() }}
+                <!-- The form make a PUT -->
                 {{method_field('PUT')}}
                 <div class="form-group">
                     <label for="name">Nom du produit : </label>

@@ -5,6 +5,7 @@
         <h1>Créer un produit :</h1>
         <div class="col-md-12">
             <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
+                <!-- Token security -->
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="name">Nom du produit : </label>

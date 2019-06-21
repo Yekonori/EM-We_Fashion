@@ -45,7 +45,7 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        // All the fields
+        // All the fields validators
         $this->validate($request, [
             'categorie' => 'required|string|max:100'
         ]);
@@ -76,6 +76,7 @@ class CategorieController extends Controller
      */
     public function edit($id)
     {
+        // Find the categorie
         $categorie = Categorie::find($id);
 
         return view('back.categorie.edit', ['categorie' => $categorie]);
@@ -90,14 +91,15 @@ class CategorieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // All the fields
+        // All the fields validators
         $this->validate($request, [
             'categorie' => 'required|string'
         ]);
 
+        // Find the categorie
         $categorie = Categorie::find($id);
 
-        // Create the categorie
+        // Update the categorie
         $categorie->update($request->all());
 
         // Redirection to categorie/index
@@ -112,10 +114,12 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
+        // Find the categorie
         $categorie = Categorie::find($id);
 
+        // Delete the categorie
         $categorie->delete();
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('message', 'Catégorie supprimé avec succès');
     }
 }

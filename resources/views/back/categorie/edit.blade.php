@@ -5,7 +5,9 @@
         <h1>Créer une catégorie :</h1>
         <div class="col-md-12">
             <form action="{{route('categories.update', $categorie->id)}}" method="post" enctype="multipart/form-data">
+                <!-- Token security -->
                 {{ csrf_field() }}
+                <!-- The form make a PUT -->
                 {{method_field('PUT')}}
                 <div class="form-group">
                     <label for="categorie">Nom de la catégorie : </label>

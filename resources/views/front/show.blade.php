@@ -16,12 +16,17 @@
             @endif
             <select class="form-control mb-4" name="sizeSelect" id="sizeSelect">
                 @forelse(explode(',', $product->size) as $size)
+                <!-- Make an option for each size the product have -->
                 <option value="{{ $size }}">{{ $size }}</option>
                 @empty
+                <option value="" class="text-uppercase">--- Aucune taille ---</option>
                 @endforelse
             </select>
             @if( $product->visibility === 'published' )
             <a class="btn btn-primary" href="#" role="button">Acheter</a>
+            @else
+            <!-- If the product's visibility isn't 'published' -->
+            <p class="alert alert-danger">Ce produit n'est plus disponible à la vente</p>
             @endif
         </div> <!-- ./end div.col-md-4 -->
     </div> <!-- ./end div.row -->
