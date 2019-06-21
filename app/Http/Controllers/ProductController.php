@@ -53,7 +53,7 @@ class ProductController extends Controller
             'name' => 'required|string|min:5|max:100',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0|max:99999.99',
-            'size.*' => 'required|string',
+            'size.*' => 'required|array',
             'picture' => 'required|image|mimes:jpeg,png,jpg,svg',
             'visibility' => 'required|in:published,unpublished',
             'status' => 'required|in:standard,sale',
@@ -63,8 +63,10 @@ class ProductController extends Controller
 
         // Stock the request
         $datas = $request->all();
-        // Implode the size's array to get a string
-        $datas["size"] = implode(',', $request->size);
+        if(!empty($datas["size"])) {
+            // Implode the size's array to get a string
+            $datas["size"] = implode(',', $request->size);   
+        }
 
         // Picture : 
         $picture = $request->file('picture');
@@ -123,7 +125,7 @@ class ProductController extends Controller
             'name' => 'required|string|min:5|max:100',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0|max:99999.99',
-            'size.*' => 'required|string',
+            'size' => 'required|array',
             'picture' => 'image|mimes:jpeg,png,jpg,svg',
             'visibility' => 'required|in:published,unpublished',
             'status' => 'required|in:standard,sale',
@@ -133,8 +135,13 @@ class ProductController extends Controller
 
         // Stock the request
         $datas = $request->all();
-        // Implode the size's array to get a string
-        $datas["size"] = implode(',', $request->size);
+        // Stock the request
+        $datas = $request->all();
+
+        if(!empty($datas["size"])) {
+            // Implode the size's array to get a string
+            $datas["size"] = implode(',', $request->size);   
+        }
 
         // Picture : 
         $picture = $request->file('picture');
